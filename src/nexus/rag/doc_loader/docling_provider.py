@@ -1,17 +1,20 @@
 
 from pathlib import Path
+from threading import Lock
 
-from langchain_docling.loader import DoclingLoader, ExportType
 from langchain_core.documents import Document
-
+from langchain_docling.loader import DoclingLoader, ExportType
+from docling.document_converter import DocumentConverter
 
 
 class DoclingDocumentLoader:
 
     def __init__(self):
+        self.converter = DocumentConverter()
         self.export_type = ExportType.MARKDOWN
+        self.lock = Lock()
 
-    def load(self, file_path: str | Path)-> list[Document]:
+    def load(self, file_path: str | Path) -> list[Document]:
 
         path = Path(file_path).expanduser().resolve()
 
@@ -19,16 +22,18 @@ class DoclingDocumentLoader:
             raise FileNotFoundError(f"File not found: {path}")
 
         if not path.is_file():
-            raise ValueError(f"Expected a file, got: {path}")
+            raise ValueError(f"Expected a file: {path}")
 
         loader = DoclingLoader(
             file_path=str(path),
+            converter=self.converter,
             export_type=self.export_type,
         )
 
-        documents = loader.load()
+        # Serialize conversion requests using this converter
+        with self.lock:
+            documents = loader.load()
 
-        # Add source information to metadata
         for doc in documents:
             doc.metadata["source"] = str(path)
 
