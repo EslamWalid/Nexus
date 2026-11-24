@@ -11,6 +11,7 @@ dependencies = [
     "docling>=2.150.1",
     "fastapi>=0.163.2",
     "flagembedding>=1.4.2",
+    "langchain-experimental>=0.4.2",
     "langchain-google-genai>=4.5.0",
     "langfuse>=5.2.0",
     "langgraph>=1.2.22",

@@ -22,3 +22,6 @@ dir_.py
 # Jupyter Notebook
 .ipynb_checkpoints/
 notebook/
+
+# data
+data/
