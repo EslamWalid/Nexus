@@ -6,7 +6,6 @@ from nexus.rag.doc_loader.docling_provider import DoclingDocumentLoader
 
 
 class DocumentLoader:
-
     def __init__(self, provider: str = "docling"):
         self.providers = {
             "docling": DoclingDocumentLoader,
@@ -20,8 +19,10 @@ class DocumentLoader:
     def load(self, file_path: str | Path) -> list[Document]:
         return self.loader.load(file_path)
 
+
 if __name__ == "__main__":
     from nexus.rag.doc_loader.loader import DocumentLoader
+
     loader = DocumentLoader("docling")
     docs = loader.load(r"D:\IAOSC\projects\Codes\Nexus\data\test_data\Cloud-Basic.pdf")
 

@@ -1,14 +1,12 @@
-
 from pathlib import Path
 from threading import Lock
 
+from docling.document_converter import DocumentConverter
 from langchain_core.documents import Document
 from langchain_docling.loader import DoclingLoader, ExportType
-from docling.document_converter import DocumentConverter
 
 
 class DoclingDocumentLoader:
-
     def __init__(self):
         self.converter = DocumentConverter()
         self.export_type = ExportType.MARKDOWN
@@ -41,7 +39,6 @@ class DoclingDocumentLoader:
 
 
 if __name__ == "__main__":
-    
     loader = DoclingDocumentLoader()
 
     docs = loader.load(r"D:\IAOSC\projects\Codes\Nexus\data\test_data\Cloud-Basic.pdf")
@@ -52,4 +49,3 @@ if __name__ == "__main__":
         print("Content:", doc.page_content)
         print("Metadata:", doc.metadata)
         print("-" * 50)
-        

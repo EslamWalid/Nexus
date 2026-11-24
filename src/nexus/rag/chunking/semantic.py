@@ -1,12 +1,10 @@
-
-from typing import Literal, Optional
+from typing import Literal
 
 from langchain_core.documents import Document
 from langchain_core.embeddings import Embeddings
 from langchain_experimental.text_splitter import (
     SemanticChunker as LCSemanticChunker,
 )
-
 
 BreakpointType = Literal[
     "percentile",
@@ -21,7 +19,7 @@ class SemanticChunking:
         self,
         embeddings: Embeddings,
         breakpoint_threshold_type: BreakpointType = "percentile",
-        breakpoint_threshold_amount: Optional[float] = None,
+        breakpoint_threshold_amount: float | None = None,
         buffer_size: int = 1,
     ):
         self.chunker = LCSemanticChunker(
@@ -34,7 +32,7 @@ class SemanticChunking:
     def split_text(
         self,
         text: str,
-        metadata: Optional[dict] = None,
+        metadata: dict | None = None,
     ) -> list[Document]:
         metadatas = [metadata] if metadata else None
 
