@@ -708,6 +708,22 @@ wheels = [
 ]
 
 [package.optional-dependencies]
+convert-core = [
+    { name = "numpy" },
+    { name = "pillow" },
+    { name = "rtree" },
+    { name = "scipy" },
+]
+feat-chunking = [
+    { name = "docling-core", extra = ["chunking"] },
+]
+service-client = [
+    { name = "httpx" },
+    { name = "python-dotenv" },
+    { name = "rich" },
+    { name = "typer" },
+    { name = "websockets" },
+]
 standard = [
     { name = "accelerate" },
     { name = "beautifulsoup4" },
@@ -1368,6 +1384,19 @@ wheels = [
 ]
 
 [[package]]
+name = "langchain-docling"
+version = "3.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "docling-slim", extra = ["convert-core", "feat-chunking", "service-client"] },
+    { name = "langchain-core" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6b/58/be79d676159e4e8e18ed1732300371e344624cf116d73df461330f274ebb/langchain_docling-3.0.0.tar.gz", hash = "sha256:f2958bfb8ec290a70357489ed723e03f57840ee28ddf112fd00ff06db627df24", size = 9197, upload-time = "2026-08-14T09:36:30.56Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c3/df/12c42d474d872eefdc65b464cf33d3ed5c9038964d4d0dfa409bd5d1b066/langchain_docling-3.0.0-py3-none-any.whl", hash = "sha256:1e24e27158863592ef05c3141417ba50fdce1879dbbb911103e5623e6e326d2f", size = 8280, upload-time = "2026-08-14T09:36:29.022Z" },
+]
+
+[[package]]
 name = "langchain-google-genai"
 version = "4.5.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1936,6 +1965,7 @@ dependencies = [
     { name = "docling" },
     { name = "fastapi" },
     { name = "flagembedding" },
+    { name = "langchain-docling" },
     { name = "langchain-google-genai" },
     { name = "langfuse" },
     { name = "langgraph" },
@@ -1961,6 +1991,7 @@ requires-dist = [
     { name = "docling", specifier = ">=2.150.1" },
     { name = "fastapi", specifier = ">=0.163.2" },
     { name = "flagembedding", specifier = ">=1.4.2" },
+    { name = "langchain-docling", specifier = ">=3.0.0" },
     { name = "langchain-google-genai", specifier = ">=4.5.0" },
     { name = "langfuse", specifier = ">=5.2.0" },
     { name = "langgraph", specifier = ">=1.2.22" },
