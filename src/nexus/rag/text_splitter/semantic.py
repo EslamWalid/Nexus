@@ -46,3 +46,20 @@ class SemanticChunking:
         documents: list[Document],
     ) -> list[Document]:
         return self.chunker.split_documents(documents)
+
+
+if __name__ == "__main__":
+    from nexus.rag.doc_loader.loader import DocumentLoader
+    from nexus.rag.embeddings.factory import get_embeddings
+
+    embeddings = get_embeddings("bge_m3")
+    chunker = SemanticChunking(embeddings=embeddings)
+    loader = DocumentLoader()
+    docs = loader.load(r"D:\IAOSC\projects\Codes\Nexus\data\test_data\Cloud-Basic.pdf")
+    for doc in docs:
+        print("Content:", doc.page_content)
+        print("Metadata:", doc.metadata)
+        print("-" * 50)
+    documents = chunker.split_text(doc.page_content)
+    print(f"Number of chunks: {len(documents)}")
+    print("Content of first chunk:", documents)
