@@ -1,8 +1,12 @@
+from typing import Literal
+
 from nexus.rag.embeddings.bge_m3 import BGEM3Embeddings
 from nexus.rag.embeddings.gemini import GeminiEmbeddings
 
+model = Literal["gemini", "bge_m3"]
 
-def get_embeddings(provider: str):
+
+def get_embeddings(provider: model = "bge_m3") -> GeminiEmbeddings | BGEM3Embeddings:
 
     if provider == "gemini":
         return GeminiEmbeddings()
